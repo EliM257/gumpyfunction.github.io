@@ -6,3 +6,8 @@ h1 {
     color:rgb(0, 128, 0);
     font-family: 'Comic Relief', Courier, monospace
 }
+body {
+     margin: 0;
+    background-image: url("ooze.gif");
+    text-align: center;
+}
