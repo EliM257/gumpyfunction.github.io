@@ -22,12 +22,10 @@ class Leaf {
         this.size = 10 + Math.random() * 20;
         this.speedY = 1 + Math.random() * 1.5;
         this.speedX = (Math.random() - 0.5) * 1;
-        this.opacity = 0.4 + Math.random() * 0.4;
+        this.opacity = 1;
 
         const colors = [
-            "rgba(85, 130, 90, OP)",
-            "rgba(120, 160, 100, OP)",
-            "rgba(180, 140, 60, OP)"
+            "rgba(0, 255, 0, OP)"
         ];
 
         const base = colors[Math.floor(Math.random() * colors.length)];
