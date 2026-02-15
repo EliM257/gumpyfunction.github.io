@@ -18,62 +18,77 @@
   <canvas id="leafCanvas"></canvas>
 
   <script src="goo.js"></script>
+  
   <h1 id="counter">0</h1>
-  <button id="btn">Ooze and Goop</button>
   <p>Passive Goo Per Second: <span id="passiveRate">0</span></p>
-  <button id="sellBtn">goo grandma for 100</button>
+  
+  <button id="btn">Ooze and Goop</button>
 
+  <button id="sellBtn">goo grandma for 100</button>
   <button id="sellBtn2">goo farm for 500</button>
 
 
   <script>
 let count = 0;
-  let passiveRate = 0; // start with 0 passive goo per second
-  const button = document.getElementById("btn");
-  const sellBtn = document.getElementById("sellBtn");
-  const sellBtn2 = document.getElementById("sellBtn2");
-  const counter = document.getElementById("counter");
-  const passiveDisplay = document.getElementById("passiveRate");
-  const audio = document.getElementById("myAudio2");
+let passiveRate = 0; // start with 0 passive goo per second
 
-  // Click to earn goo
-  button.addEventListener("click", function() {
-    count++;
+const button = document.getElementById("btn");
+const sellBtn = document.getElementById("sellBtn");
+const sellBtn2 = document.getElementById("sellBtn2");
+const counter = document.getElementById("counter");
+const passiveDisplay = document.getElementById("passiveRate");
+const audio = document.getElementById("myAudio2");
+
+// Keep track of current prices
+let sellBtnPrice = 100;
+let sellBtn2Price = 500;
+
+// Click to earn goo
+button.addEventListener("click", function() {
+  count++;
+  counter.textContent = count;
+
+  audio.currentTime = 0; 
+  audio.play();
+});
+
+// Sell button 1: increase passive by 1
+sellBtn.addEventListener("click", function() {
+  if (count >= sellBtnPrice) {
+    count -= sellBtnPrice;
     counter.textContent = count;
 
-    audio.currentTime = 0; 
-    audio.play();
-  });
+    passiveRate++;
+    passiveDisplay.textContent = passiveRate;
 
-  // Sell 100 goo and increase passive rate by 1
-  sellBtn.addEventListener("click", function() {
-    const sellAmount = 100;
-    if (count >= sellAmount) {
-      count -= sellAmount;
-      counter.textContent = count;
+    // Increase price by 15%
+    sellBtnPrice = Math.ceil(sellBtnPrice * 1.15);
+    sellBtn.textContent = `goo grandma: ${sellBtnPrice}`;
+  }dd
+});
 
-      passiveRate++; // increase passive income
-      passiveDisplay.textContent = passiveRate;
-    }
-  });
-
-      sellBtn2.addEventListener("click", function() {
-    const sellAmount = 500;
-    if (count >= sellAmount) {
-      count -= sellAmount;
-      counter.textContent = count;
-
-      passiveRate+= 5; // increase passive income
-      passiveDisplay.textContent = passiveRate;
-    }
-  });
-
-  // Passive goo
-  setInterval(function() {
-    count += passiveRate;
+// Sell button 2: increase passive by 5
+sellBtn2.addEventListener("click", function() {
+  if (count >= sellBtn2Price) {
+    count -= sellBtn2Price;
     counter.textContent = count;
-  }, 1000);
+
+    passiveRate += 5;
+    passiveDisplay.textContent = passiveRate;
+
+    // Increase price by 15%
+    sellBtn2Price = Math.ceil(sellBtn2Price * 1.15);
+    sellBtn2.textContent = `goo farm: ${sellBtn2Price}`;
+  }
+});
+
+// Passive goo
+setInterval(function() {
+  count += passiveRate;
+  counter.textContent = count;
+}, 1000);
 </script>
+  
   <div>
     <iframe width="640" height="480"
     src="https://www.youtube.com/embed/QjgmcPhqBuU"
@@ -81,10 +96,12 @@ let count = 0;
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen>
-  </iframe>
-</div>
+    </iframe>
+  </div>
+  
 </body>
 </html>
+
 
 
 
