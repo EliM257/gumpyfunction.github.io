@@ -10,13 +10,22 @@
   <h1>Gumpy Function</h1>
   <p>Gumbo.</p>
   <p>you ever wondered how ta goo?</p>
-  <a href="https://docs.google.com/presentation/d/1muc8-4UJDTf0yr0wxpY9nGGm5xA8lMX0Ntc4WsmlP5M/edit?slide=id.p#slide=id.p" target="_blank" rel="noopener noreferrer">
-        <button>Gump and Gunk</button>
-  </a>
+  
+  <button onclick="playAudio()">Gump and Gunk</button>
+  <audio id="myAudio" src="slime.mp3"></audio>
+    <script>
+        function playAudio() {
+            const audio = document.getElementById("myAudio");
+            audio.play();
+        }
+    </script>
+  
   <canvas id="leafCanvas"></canvas>
+  
   <script src="goo.js"></script>
 </body>
 </html>
+
 
 
 
