@@ -11,20 +11,15 @@
   <p>Gumbo.</p>
   <p>you ever wondered how ta goo?</p>
   
-  <button onclick="playAudio()">Gump and Gunk</button>
   <audio id="myAudio" src="slime.mp3"></audio>
-    <script>
-        function playAudio() {
-            const audio = document.getElementById("myAudio");
-            audio.play();
-        }
-    </script>
+  <button onclick="document.getElementById('audio').play()">Play</button>
   
   <canvas id="leafCanvas"></canvas>
   
   <script src="goo.js"></script>
 </body>
 </html>
+
 
 
 
