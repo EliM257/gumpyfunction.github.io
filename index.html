@@ -89,11 +89,11 @@ function buyProperty(priceVar, btnElement, passiveIncrease, clickIncrease=0) {
     counter.textContent = count;
 
     passiveRate += passiveIncrease;
-    clickPower += clickIncrease; // increase click power
+    clickPower += clickIncrease; // integer increase
     passiveDisplay.textContent = passiveRate;
     clickPowerDisplay.textContent = clickPower;
 
-    // Increase price by 15%
+    // Increase price by 15%, rounded up to nearest integer
     priceVar.value = Math.ceil(priceVar.value * 1.15);
     btnElement.textContent = `${btnElement.dataset.name}: ${priceVar.value}`;
   }
@@ -119,15 +119,15 @@ sellBtn6.dataset.name = "Goo Temple";
 sellBtn7.dataset.name = "Goo Wizard Tower";
 sellBtn8.dataset.name = "Goo Shipment";
 
-// Event listeners with optional click increase
-sellBtn.addEventListener("click", () => buyProperty(sellBtnObj, sellBtn, 1, 0.1));
-sellBtn2.addEventListener("click", () => buyProperty(sellBtn2Obj, sellBtn2, 10, 0.5));
-sellBtn3.addEventListener("click", () => buyProperty(sellBtn3Obj, sellBtn3, 50, 1));
-sellBtn4.addEventListener("click", () => buyProperty(sellBtn4Obj, sellBtn4, 75, 2));
-sellBtn5.addEventListener("click", () => buyProperty(sellBtn5Obj, sellBtn5, 300, 5));
-sellBtn6.addEventListener("click", () => buyProperty(sellBtn6Obj, sellBtn6, 1000, 10));
-sellBtn7.addEventListener("click", () => buyProperty(sellBtn7Obj, sellBtn7, 20000, 50));
-sellBtn8.addEventListener("click", () => buyProperty(sellBtn8Obj, sellBtn8, 100000, 100));
+// Event listeners with integer click increases
+sellBtn.addEventListener("click", () => buyProperty(sellBtnObj, sellBtn, 1, 1));
+sellBtn2.addEventListener("click", () => buyProperty(sellBtn2Obj, sellBtn2, 10, 2));
+sellBtn3.addEventListener("click", () => buyProperty(sellBtn3Obj, sellBtn3, 50, 5));
+sellBtn4.addEventListener("click", () => buyProperty(sellBtn4Obj, sellBtn4, 75, 10));
+sellBtn5.addEventListener("click", () => buyProperty(sellBtn5Obj, sellBtn5, 300, 25));
+sellBtn6.addEventListener("click", () => buyProperty(sellBtn6Obj, sellBtn6, 1000, 50));
+sellBtn7.addEventListener("click", () => buyProperty(sellBtn7Obj, sellBtn7, 20000, 100));
+sellBtn8.addEventListener("click", () => buyProperty(sellBtn8Obj, sellBtn8, 100000, 500));
 
 // Passive goo
 setInterval(function() {
@@ -148,6 +148,7 @@ setInterval(function() {
   
 </body>
 </html>
+
 
 
 
