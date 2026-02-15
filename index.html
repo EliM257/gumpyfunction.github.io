@@ -24,10 +24,20 @@
   
   <div>
     <button id="btn">Ooze and Goop</button>
+    <p></p>
   </div>
-
-  <button id="sellBtn">goo grandma for 100</button>
-  <button id="sellBtn2">goo farm for 500</button>
+  <div>
+    <button id="sellBtn">Goo Grandma: 100</button>
+    <button id="sellBtn2">Goo Farm: 500</button>
+    <button id="sellBtn3">Goo Mine: 1300</button>
+  </div>
+  <div>
+    <button id="sellBtn4">Goo Factory: 5000</button>
+    <button id="sellBtn5">Goo Bank: 10000</button>
+    <button id="sellBtn6">Goo Temple: 100000</button>
+  </div>
+  <button id="sellBtn7">Goo Wizard Tower: 1500000</button>
+  <button id="sellBtn8">Goo Shipment: 5000000</button>
 
 
   <script>
@@ -44,6 +54,13 @@ const audio = document.getElementById("myAudio2");
 // Keep track of current prices
 let sellBtnPrice = 100;
 let sellBtn2Price = 500;
+let sellBtn3Price = 1300;
+let sellBtn4Price = 5000;
+let sellBtn5Price = 10000;
+let sellBtn6Price = 100000;
+let sellBtn7Price = 1500000;
+let sellBtn8Price = 5000000;
+
 
 // Click to earn goo
 button.addEventListener("click", function() {
@@ -65,7 +82,7 @@ sellBtn.addEventListener("click", function() {
 
     // Increase price by 15%
     sellBtnPrice = Math.ceil(sellBtnPrice * 1.15);
-    sellBtn.textContent = `goo grandma: ${sellBtnPrice}`;
+    sellBtn.textContent = `Goo Grandma: ${sellBtnPrice}`;
   }dd
 });
 
@@ -80,7 +97,91 @@ sellBtn2.addEventListener("click", function() {
 
     // Increase price by 15%
     sellBtn2Price = Math.ceil(sellBtn2Price * 1.15);
-    sellBtn2.textContent = `goo farm: ${sellBtn2Price}`;
+    sellBtn2.textContent = `Goo Farm: ${sellBtn2Price}`;
+  }
+});
+
+sellBtn3.addEventListener("click", function() {
+  if (count >= sellBtn3Price) {
+    count -= sellBtn3Price;
+    counter.textContent = count;
+
+    passiveRate += 20;
+    passiveDisplay.textContent = passiveRate;
+
+    // Increase price by 15%
+    sellBtn3Price = Math.ceil(sellBtn3Price * 1.15);
+    sellBtn3.textContent = `Goo Mine: ${sellBtn3Price}`;
+  }
+});
+
+sellBtn4.addEventListener("click", function() {
+  if (count >= sellBtn4Price) {
+    count -= sellBtn4Price;
+    counter.textContent = count;
+
+    passiveRate += 50;
+    passiveDisplay.textContent = passiveRate;
+
+    // Increase price by 15%
+    sellBtn4Price = Math.ceil(sellBtn4Price * 1.15);
+    sellBtn4.textContent = `Goo Factory: ${sellBtn4Price}`;
+  }
+});
+
+sellBtn5.addEventListener("click", function() {
+  if (count >= sellBtn5Price) {
+    count -= sellBtn5Price;
+    counter.textContent = count;
+
+    passiveRate += 150;
+    passiveDisplay.textContent = passiveRate;
+
+    // Increase price by 15%
+    sellBtn5Price = Math.ceil(sellBtn5Price * 1.15);
+    sellBtn5.textContent = `Goo Bank: ${sellBtn5Price}`;
+  }
+});
+
+sellBtn6.addEventListener("click", function() {
+  if (count >= sellBtn6Price) {
+    count -= sellBtn6Price;
+    counter.textContent = count;
+
+    passiveRate += 1000;
+    passiveDisplay.textContent = passiveRate;
+
+    // Increase price by 15%
+    sellBtn6Price = Math.ceil(sellBtn6Price * 1.15);
+    sellBtn6.textContent = `Goo Temple: ${sellBtn6Price}`;
+  }
+});
+
+sellBtn7.addEventListener("click", function() {
+  if (count >= sellBtn7Price) {
+    count -= sellBtn7Price;
+    counter.textContent = count;
+
+    passiveRate += 20000;
+    passiveDisplay.textContent = passiveRate;
+
+    // Increase price by 15%
+    sellBtn7Price = Math.ceil(sellBtn7Price * 1.15);
+    sellBtn7.textContent = `Goo Wizard Tower: ${sellBtn7Price}`;
+  }
+});
+
+sellBtn8.addEventListener("click", function() {
+  if (count >= sellBtn8Price) {
+    count -= sellBtn8Price;
+    counter.textContent = count;
+
+    passiveRate += 100000;
+    passiveDisplay.textContent = passiveRate;
+
+    // Increase price by 15%
+    sellBtn8Price = Math.ceil(sellBtn8Price * 1.15);
+    sellBtn8.textContent = `Goo Shipment: ${sellBtn8Price}`;
   }
 });
 
@@ -103,6 +204,7 @@ setInterval(function() {
   
 </body>
 </html>
+
 
 
 
