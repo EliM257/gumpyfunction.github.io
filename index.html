@@ -47,112 +47,62 @@ let passiveRate = 0;
 let clickPower = 1; // starting click value
 
 const button = document.getElementById("btn");
-const sellBtn = document.getElementById("sellBtn");
-const sellBtn2 = document.getElementById("sellBtn2");
-const sellBtn3 = document.getElementById("sellBtn3");
-const sellBtn4 = document.getElementById("sellBtn4");
-const sellBtn5 = document.getElementById("sellBtn5");
-const sellBtn6 = document.getElementById("sellBtn6");
-const sellBtn7 = document.getElementById("sellBtn7");
-const sellBtn8 = document.getElementById("sellBtn8");
-
 const counter = document.getElementById("counter");
 const passiveDisplay = document.getElementById("passiveRate");
 const clickPowerDisplay = document.getElementById("clickPowerDisplay");
 const audio = document.getElementById("myAudio2");
 
-// Count displays
-const sellBtnCountDisplay = document.getElementById("sellBtnCount");
-const sellBtn2CountDisplay = document.getElementById("sellBtn2Count");
-const sellBtn3CountDisplay = document.getElementById("sellBtn3Count");
-const sellBtn4CountDisplay = document.getElementById("sellBtn4Count");
-const sellBtn5CountDisplay = document.getElementById("sellBtn5Count");
-const sellBtn6CountDisplay = document.getElementById("sellBtn6Count");
-const sellBtn7CountDisplay = document.getElementById("sellBtn7Count");
-const sellBtn8CountDisplay = document.getElementById("sellBtn8Count");
+// Property buttons
+const buttons = [
+  { btn: document.getElementById("sellBtn"), price: 100, passive: 1, click: 1, countSpan: document.getElementById("sellBtnCount"), name: "Goo Grandma" },
+  { btn: document.getElementById("sellBtn2"), price: 500, passive: 10, click: 2, countSpan: document.getElementById("sellBtn2Count"), name: "Goo Farm" },
+  { btn: document.getElementById("sellBtn3"), price: 1300, passive: 50, click: 5, countSpan: document.getElementById("sellBtn3Count"), name: "Goo Mine" },
+  { btn: document.getElementById("sellBtn4"), price: 5000, passive: 75, click: 10, countSpan: document.getElementById("sellBtn4Count"), name: "Goo Factory" },
+  { btn: document.getElementById("sellBtn5"), price: 10000, passive: 300, click: 25, countSpan: document.getElementById("sellBtn5Count"), name: "Goo Bank" },
+  { btn: document.getElementById("sellBtn6"), price: 100000, passive: 1000, click: 50, countSpan: document.getElementById("sellBtn6Count"), name: "Goo Temple" },
+  { btn: document.getElementById("sellBtn7"), price: 1500000, passive: 20000, click: 100, countSpan: document.getElementById("sellBtn7Count"), name: "Goo Wizard Tower" },
+  { btn: document.getElementById("sellBtn8"), price: 5000000, passive: 100000, click: 500, countSpan: document.getElementById("sellBtn8Count"), name: "Goo Shipment" }
+];
 
-// Property counts
-let sellBtnCount = 0;
-let sellBtn2Count = 0;
-let sellBtn3Count = 0;
-let sellBtn4Count = 0;
-let sellBtn5Count = 0;
-let sellBtn6Count = 0;
-let sellBtn7Count = 0;
-let sellBtn8Count = 0;
-
-// Current prices
-let sellBtnPrice = 100;
-let sellBtn2Price = 500;
-let sellBtn3Price = 1300;
-let sellBtn4Price = 5000;
-let sellBtn5Price = 10000;
-let sellBtn6Price = 100000;
-let sellBtn7Price = 1500000;
-let sellBtn8Price = 5000000;
+// Add a persistent count property for each button
+buttons.forEach(item => item.count = 0);
 
 // Click to earn goo
-btn.addEventListener("click", function() {
+button.addEventListener("click", function() {
   count += clickPower;
   counter.textContent = count;
 
-  audio.currentTime = 0; 
+  audio.currentTime = 0;
   audio.play();
 });
 
-// Helper to handle property purchases
-function buyProperty(priceVar, btnElement, passiveIncrease, clickIncrease, countVar, countDisplay) {
-  if (count >= priceVar.value) {
-    count -= priceVar.value;
+// Helper function to buy property
+function buyProperty(item) {
+  if (count >= item.price) {
+    count -= item.price;
     counter.textContent = count;
 
-    passiveRate += passiveIncrease;
-    clickPower += clickIncrease;
+    passiveRate += item.passive;
+    clickPower += item.click;
 
-    // Update property count
-    countVar.value++;
-    countDisplay.textContent = countVar.value;
+    item.count++; // persistent count
+    item.countSpan.textContent = item.count;
 
     passiveDisplay.textContent = passiveRate;
     clickPowerDisplay.textContent = clickPower;
 
     // Increase price by 15%
-    priceVar.value = Math.ceil(priceVar.value * 1.15);
-    btnElement.childNodes[0].nodeValue = `${btnElement.dataset.name}: ${priceVar.value} (`;
+    item.price = Math.ceil(item.price * 1.15);
+    item.btn.firstChild.nodeValue = `${item.name}: ${item.price} (`;
   }
 }
 
-// Price objects
-const sellBtnObj = {value: sellBtnPrice};
-const sellBtn2Obj = {value: sellBtn2Price};
-const sellBtn3Obj = {value: sellBtn3Price};
-const sellBtn4Obj = {value: sellBtn4Price};
-const sellBtn5Obj = {value: sellBtn5Price};
-const sellBtn6Obj = {value: sellBtn6Price};
-const sellBtn7Obj = {value: sellBtn7Price};
-const sellBtn8Obj = {value: sellBtn8Price};
+// Attach event listeners
+buttons.forEach(item => {
+  item.btn.addEventListener("click", () => buyProperty(item));
+});
 
-// Dataset names
-sellBtn.dataset.name = "Goo Grandma";
-sellBtn2.dataset.name = "Goo Farm";
-sellBtn3.dataset.name = "Goo Mine";
-sellBtn4.dataset.name = "Goo Factory";
-sellBtn5.dataset.name = "Goo Bank";
-sellBtn6.dataset.name = "Goo Temple";
-sellBtn7.dataset.name = "Goo Wizard Tower";
-sellBtn8.dataset.name = "Goo Shipment";
-
-// Event listeners
-sellBtn.addEventListener("click", () => buyProperty(sellBtnObj, sellBtn, 1, 1, {value: sellBtnCount}, sellBtnCountDisplay));
-sellBtn2.addEventListener("click", () => buyProperty(sellBtn2Obj, sellBtn2, 10, 2, {value: sellBtn2Count}, sellBtn2CountDisplay));
-sellBtn3.addEventListener("click", () => buyProperty(sellBtn3Obj, sellBtn3, 50, 5, {value: sellBtn3Count}, sellBtn3CountDisplay));
-sellBtn4.addEventListener("click", () => buyProperty(sellBtn4Obj, sellBtn4, 75, 10, {value: sellBtn4Count}, sellBtn4CountDisplay));
-sellBtn5.addEventListener("click", () => buyProperty(sellBtn5Obj, sellBtn5, 300, 25, {value: sellBtn5Count}, sellBtn5CountDisplay));
-sellBtn6.addEventListener("click", () => buyProperty(sellBtn6Obj, sellBtn6, 1000, 50, {value: sellBtn6Count}, sellBtn6CountDisplay));
-sellBtn7.addEventListener("click", () => buyProperty(sellBtn7Obj, sellBtn7, 20000, 100, {value: sellBtn7Count}, sellBtn7CountDisplay));
-sellBtn8.addEventListener("click", () => buyProperty(sellBtn8Obj, sellBtn8, 100000, 500, {value: sellBtn8Count}, sellBtn8CountDisplay));
-
-// Passive goo
+// Passive goo every second
 setInterval(function() {
   count += passiveRate;
   counter.textContent = count;
@@ -173,6 +123,7 @@ setInterval(function() {
   
 </body>
 </html>
+
 
 
 
