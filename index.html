@@ -21,6 +21,7 @@
   <h1>Goo Clicker</h1>
   <h2 id="counter">0</h2>
   <p>Passive Goo Per Second: <span id="passiveRate">0</span></p>
+  <p>Goo per click: <span id="clickPowerDisplay">1</span></p>
   
   <div>
     <button id="btn">Ooze and Goop</button>
@@ -36,22 +37,33 @@
     <button id="sellBtn5">Goo Bank: 10000</button>
     <button id="sellBtn6">Goo Temple: 100000</button>
   </div>
-  <button id="sellBtn7">Goo Wizard Tower: 1500000</button>
-  <button id="sellBtn8">Goo Shipment: 5000000</button>
+  <div>
+    <button id="sellBtn7">Goo Wizard Tower: 1500000</button>
+    <button id="sellBtn8">Goo Shipment: 5000000</button>
+  </div>
 
 
   <script>
 let count = 0;
-let passiveRate = 0; // start with 0 passive goo per second
+let passiveRate = 0; 
+let clickPower = 1; // starting click value
 
 const button = document.getElementById("btn");
 const sellBtn = document.getElementById("sellBtn");
 const sellBtn2 = document.getElementById("sellBtn2");
+const sellBtn3 = document.getElementById("sellBtn3");
+const sellBtn4 = document.getElementById("sellBtn4");
+const sellBtn5 = document.getElementById("sellBtn5");
+const sellBtn6 = document.getElementById("sellBtn6");
+const sellBtn7 = document.getElementById("sellBtn7");
+const sellBtn8 = document.getElementById("sellBtn8");
+
 const counter = document.getElementById("counter");
 const passiveDisplay = document.getElementById("passiveRate");
+const clickPowerDisplay = document.getElementById("clickPowerDisplay");
 const audio = document.getElementById("myAudio2");
 
-// Keep track of current prices
+// Current prices
 let sellBtnPrice = 100;
 let sellBtn2Price = 500;
 let sellBtn3Price = 1300;
@@ -61,129 +73,61 @@ let sellBtn6Price = 100000;
 let sellBtn7Price = 1500000;
 let sellBtn8Price = 5000000;
 
-
 // Click to earn goo
 button.addEventListener("click", function() {
-  count++;
+  count += clickPower;
   counter.textContent = count;
 
   audio.currentTime = 0; 
   audio.play();
 });
 
-// Sell button 1: increase passive by 1
-sellBtn.addEventListener("click", function() {
-  if (count >= sellBtnPrice) {
-    count -= sellBtnPrice;
+// Helper to handle property purchases
+function buyProperty(priceVar, btnElement, passiveIncrease, clickIncrease=0) {
+  if (count >= priceVar.value) {
+    count -= priceVar.value;
     counter.textContent = count;
 
-    passiveRate++;
+    passiveRate += passiveIncrease;
+    clickPower += clickIncrease; // increase click power
     passiveDisplay.textContent = passiveRate;
+    clickPowerDisplay.textContent = clickPower;
 
     // Increase price by 15%
-    sellBtnPrice = Math.ceil(sellBtnPrice * 1.15);
-    sellBtn.textContent = `Goo Grandma: ${sellBtnPrice}`;
-  }dd
-});
-
-// Sell button 2: increase passive by 5
-sellBtn2.addEventListener("click", function() {
-  if (count >= sellBtn2Price) {
-    count -= sellBtn2Price;
-    counter.textContent = count;
-
-    passiveRate += 5;
-    passiveDisplay.textContent = passiveRate;
-
-    // Increase price by 15%
-    sellBtn2Price = Math.ceil(sellBtn2Price * 1.15);
-    sellBtn2.textContent = `Goo Farm: ${sellBtn2Price}`;
+    priceVar.value = Math.ceil(priceVar.value * 1.15);
+    btnElement.textContent = `${btnElement.dataset.name}: ${priceVar.value}`;
   }
-});
+}
 
-sellBtn3.addEventListener("click", function() {
-  if (count >= sellBtn3Price) {
-    count -= sellBtn3Price;
-    counter.textContent = count;
+// Define price objects for each button
+const sellBtnObj = {value: sellBtnPrice};
+const sellBtn2Obj = {value: sellBtn2Price};
+const sellBtn3Obj = {value: sellBtn3Price};
+const sellBtn4Obj = {value: sellBtn4Price};
+const sellBtn5Obj = {value: sellBtn5Price};
+const sellBtn6Obj = {value: sellBtn6Price};
+const sellBtn7Obj = {value: sellBtn7Price};
+const sellBtn8Obj = {value: sellBtn8Price};
 
-    passiveRate += 20;
-    passiveDisplay.textContent = passiveRate;
+// Add dataset names for buttons
+sellBtn.dataset.name = "Goo Grandma";
+sellBtn2.dataset.name = "Goo Farm";
+sellBtn3.dataset.name = "Goo Mine";
+sellBtn4.dataset.name = "Goo Factory";
+sellBtn5.dataset.name = "Goo Bank";
+sellBtn6.dataset.name = "Goo Temple";
+sellBtn7.dataset.name = "Goo Wizard Tower";
+sellBtn8.dataset.name = "Goo Shipment";
 
-    // Increase price by 15%
-    sellBtn3Price = Math.ceil(sellBtn3Price * 1.15);
-    sellBtn3.textContent = `Goo Mine: ${sellBtn3Price}`;
-  }
-});
-
-sellBtn4.addEventListener("click", function() {
-  if (count >= sellBtn4Price) {
-    count -= sellBtn4Price;
-    counter.textContent = count;
-
-    passiveRate += 50;
-    passiveDisplay.textContent = passiveRate;
-
-    // Increase price by 15%
-    sellBtn4Price = Math.ceil(sellBtn4Price * 1.15);
-    sellBtn4.textContent = `Goo Factory: ${sellBtn4Price}`;
-  }
-});
-
-sellBtn5.addEventListener("click", function() {
-  if (count >= sellBtn5Price) {
-    count -= sellBtn5Price;
-    counter.textContent = count;
-
-    passiveRate += 150;
-    passiveDisplay.textContent = passiveRate;
-
-    // Increase price by 15%
-    sellBtn5Price = Math.ceil(sellBtn5Price * 1.15);
-    sellBtn5.textContent = `Goo Bank: ${sellBtn5Price}`;
-  }
-});
-
-sellBtn6.addEventListener("click", function() {
-  if (count >= sellBtn6Price) {
-    count -= sellBtn6Price;
-    counter.textContent = count;
-
-    passiveRate += 1000;
-    passiveDisplay.textContent = passiveRate;
-
-    // Increase price by 15%
-    sellBtn6Price = Math.ceil(sellBtn6Price * 1.15);
-    sellBtn6.textContent = `Goo Temple: ${sellBtn6Price}`;
-  }
-});
-
-sellBtn7.addEventListener("click", function() {
-  if (count >= sellBtn7Price) {
-    count -= sellBtn7Price;
-    counter.textContent = count;
-
-    passiveRate += 20000;
-    passiveDisplay.textContent = passiveRate;
-
-    // Increase price by 15%
-    sellBtn7Price = Math.ceil(sellBtn7Price * 1.15);
-    sellBtn7.textContent = `Goo Wizard Tower: ${sellBtn7Price}`;
-  }
-});
-
-sellBtn8.addEventListener("click", function() {
-  if (count >= sellBtn8Price) {
-    count -= sellBtn8Price;
-    counter.textContent = count;
-
-    passiveRate += 100000;
-    passiveDisplay.textContent = passiveRate;
-
-    // Increase price by 15%
-    sellBtn8Price = Math.ceil(sellBtn8Price * 1.15);
-    sellBtn8.textContent = `Goo Shipment: ${sellBtn8Price}`;
-  }
-});
+// Event listeners with optional click increase
+sellBtn.addEventListener("click", () => buyProperty(sellBtnObj, sellBtn, 1, 0.1));
+sellBtn2.addEventListener("click", () => buyProperty(sellBtn2Obj, sellBtn2, 10, 0.5));
+sellBtn3.addEventListener("click", () => buyProperty(sellBtn3Obj, sellBtn3, 50, 1));
+sellBtn4.addEventListener("click", () => buyProperty(sellBtn4Obj, sellBtn4, 75, 2));
+sellBtn5.addEventListener("click", () => buyProperty(sellBtn5Obj, sellBtn5, 300, 5));
+sellBtn6.addEventListener("click", () => buyProperty(sellBtn6Obj, sellBtn6, 1000, 10));
+sellBtn7.addEventListener("click", () => buyProperty(sellBtn7Obj, sellBtn7, 20000, 50));
+sellBtn8.addEventListener("click", () => buyProperty(sellBtn8Obj, sellBtn8, 100000, 100));
 
 // Passive goo
 setInterval(function() {
@@ -204,6 +148,7 @@ setInterval(function() {
   
 </body>
 </html>
+
 
 
 
