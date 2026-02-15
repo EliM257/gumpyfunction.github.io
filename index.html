@@ -21,24 +21,45 @@
   <h1 id="counter">0</h1>
   <button id="btn">Ooze and Goop</button>
 
+  <button id="sellBtn">goo grandma for 100</button>
+
   <script>
-    let count = 0;
-    const button = document.getElementById("btn");
-    const counter = document.getElementById("counter");
-    const audio = document.getElementById("myAudio2");
+let count = 0;
+  const button = document.getElementById("btn");
+  const sellBtn = document.getElementById("sellBtn");
+  const counter = document.getElementById("counter");
+  const audio = document.getElementById("myAudio2");
 
-    button.addEventListener("click", function() {
-      count++;
+  // Click to earn goo
+  button.addEventListener("click", function() {
+    count++;
+    counter.textContent = count;
+
+    audio.currentTime = 0; // restart sound
+    audio.play();
+  });
+
+  // Sell 10 goo silently
+  sellBtn.addEventListener("click", function() {
+    const sellAmount = 100;
+    if (count >= sellAmount) {
+      count -= sellAmount;
       counter.textContent = count;
+    }
+  });
 
-      audio.currentTime = 0;
-      audio.play();
-    });
+  // Passive goo: 1 per second
+  setInterval(function() {
+    count++;
+    counter.textContent = count;
+  }, 1000); // 1000 ms = 1 second
+
   </script>
 
 
 </body>
 </html>
+
 
 
 
