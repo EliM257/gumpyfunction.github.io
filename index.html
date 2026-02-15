@@ -23,11 +23,15 @@
 
   <button id="sellBtn">goo grandma for 100</button>
 
+  <button id="sellBtn2">goo farm for 500</button>
+
+
   <script>
 let count = 0;
   let passiveRate = 0; // start with 0 passive goo per second
   const button = document.getElementById("btn");
   const sellBtn = document.getElementById("sellBtn");
+  const sellBtn2 = document.getElementById("sellBtn2");
   const counter = document.getElementById("counter");
   const passiveDisplay = document.getElementById("passiveRate");
   const audio = document.getElementById("myAudio2");
@@ -53,32 +57,23 @@ let count = 0;
     }
   });
 
+      sellBtn2.addEventListener("click", function() {
+    const sellAmount = 500;
+    if (count >= sellAmount) {
+      count -= sellAmount;
+      counter.textContent = count;
+
+      passiveRate+= 5; // increase passive income
+      passiveDisplay.textContent = passiveRate;
+    }
+  });
+
   // Passive goo
   setInterval(function() {
     count += passiveRate;
     counter.textContent = count;
   }, 1000);
   </script>
-<iframe width="560" height="315"
-    src="https://www.youtube.com/watch?v=QjgmcPhqBuU"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-</iframe>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
