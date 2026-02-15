@@ -25,9 +25,11 @@
 
   <script>
 let count = 0;
+  let passiveRate = 1; // starting passive goo per second
   const button = document.getElementById("btn");
   const sellBtn = document.getElementById("sellBtn");
   const counter = document.getElementById("counter");
+  const passiveDisplay = document.getElementById("passiveRate");
   const audio = document.getElementById("myAudio2");
 
   // Click to earn goo
@@ -35,30 +37,33 @@ let count = 0;
     count++;
     counter.textContent = count;
 
-    audio.currentTime = 0; // restart sound
+    audio.currentTime = 0; 
     audio.play();
   });
 
-  // Sell 10 goo silently
+  // Sell 10 goo and increase passive rate by 1
   sellBtn.addEventListener("click", function() {
     const sellAmount = 100;
     if (count >= sellAmount) {
       count -= sellAmount;
       counter.textContent = count;
+
+      passiveRate++; // increase passive income
+      passiveDisplay.textContent = passiveRate;
     }
   });
 
-  // Passive goo: 1 per second
+  // Passive goo
   setInterval(function() {
-    count++;
+    count += passiveRate;
     counter.textContent = count;
-  }, 1000); // 1000 ms = 1 second
-
+  }, 1000);
   </script>
 
 
 </body>
 </html>
+
 
 
 
