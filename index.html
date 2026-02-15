@@ -28,22 +28,20 @@
     <p></p>
   </div>
   <div>
-    <button id="sellBtn">Goo Grandma: 100</button>
-    <button id="sellBtn2">Goo Farm: 500</button>
-    <button id="sellBtn3">Goo Mine: 1300</button>
+    <button id="sellBtn">Goo Grandma: 100 (<span id="sellBtnCount">0</span>)</button>
+    <button id="sellBtn2">Goo Farm: 500 (<span id="sellBtn2Count">0</span>)</button>
+    <button id="sellBtn3">Goo Mine: 1300 (<span id="sellBtn3Count">0</span>)</button>
   </div>
   <div>
-    <button id="sellBtn4">Goo Factory: 5000</button>
-    <button id="sellBtn5">Goo Bank: 10000</button>
-    <button id="sellBtn6">Goo Temple: 100000</button>
+    <button id="sellBtn4">Goo Factory: 5000 (<span id="sellBtn4Count">0</span>)</button>
+    <button id="sellBtn5">Goo Bank: 10000 (<span id="sellBtn5Count">0</span>)</button>
+    <button id="sellBtn6">Goo Temple: 100000 (<span id="sellBtn6Count">0</span>)</button>
   </div>
-  <div>
-    <button id="sellBtn7">Goo Wizard Tower: 1500000</button>
-    <button id="sellBtn8">Goo Shipment: 5000000</button>
-  </div>
+    <button id="sellBtn7">Goo Wizard Tower: 1500000 (<span id="sellBtn7Count">0</span>)</button>
+    <button id="sellBtn8">Goo Shipment: 5000000 (<span id="sellBtn8Count">0</span>)</button>
 
 
-  <script>
+<script>
 let count = 0;
 let passiveRate = 0; 
 let clickPower = 1; // starting click value
@@ -94,7 +92,7 @@ let sellBtn7Price = 1500000;
 let sellBtn8Price = 5000000;
 
 // Click to earn goo
-button.addEventListener("click", function() {
+btn.addEventListener("click", function() {
   count += clickPower;
   counter.textContent = count;
 
@@ -173,6 +171,7 @@ setInterval(function() {
   
 </body>
 </html>
+
 
 
 
