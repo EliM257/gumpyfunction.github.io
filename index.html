@@ -63,6 +63,26 @@ const passiveDisplay = document.getElementById("passiveRate");
 const clickPowerDisplay = document.getElementById("clickPowerDisplay");
 const audio = document.getElementById("myAudio2");
 
+// Count displays
+const sellBtnCountDisplay = document.getElementById("sellBtnCount");
+const sellBtn2CountDisplay = document.getElementById("sellBtn2Count");
+const sellBtn3CountDisplay = document.getElementById("sellBtn3Count");
+const sellBtn4CountDisplay = document.getElementById("sellBtn4Count");
+const sellBtn5CountDisplay = document.getElementById("sellBtn5Count");
+const sellBtn6CountDisplay = document.getElementById("sellBtn6Count");
+const sellBtn7CountDisplay = document.getElementById("sellBtn7Count");
+const sellBtn8CountDisplay = document.getElementById("sellBtn8Count");
+
+// Property counts
+let sellBtnCount = 0;
+let sellBtn2Count = 0;
+let sellBtn3Count = 0;
+let sellBtn4Count = 0;
+let sellBtn5Count = 0;
+let sellBtn6Count = 0;
+let sellBtn7Count = 0;
+let sellBtn8Count = 0;
+
 // Current prices
 let sellBtnPrice = 100;
 let sellBtn2Price = 500;
@@ -83,23 +103,28 @@ button.addEventListener("click", function() {
 });
 
 // Helper to handle property purchases
-function buyProperty(priceVar, btnElement, passiveIncrease, clickIncrease=0) {
+function buyProperty(priceVar, btnElement, passiveIncrease, clickIncrease, countVar, countDisplay) {
   if (count >= priceVar.value) {
     count -= priceVar.value;
     counter.textContent = count;
 
     passiveRate += passiveIncrease;
-    clickPower += clickIncrease; // integer increase
+    clickPower += clickIncrease;
+
+    // Update property count
+    countVar.value++;
+    countDisplay.textContent = countVar.value;
+
     passiveDisplay.textContent = passiveRate;
     clickPowerDisplay.textContent = clickPower;
 
-    // Increase price by 15%, rounded up to nearest integer
+    // Increase price by 15%
     priceVar.value = Math.ceil(priceVar.value * 1.15);
-    btnElement.textContent = `${btnElement.dataset.name}: ${priceVar.value}`;
+    btnElement.childNodes[0].nodeValue = `${btnElement.dataset.name}: ${priceVar.value} (`;
   }
 }
 
-// Define price objects for each button
+// Price objects
 const sellBtnObj = {value: sellBtnPrice};
 const sellBtn2Obj = {value: sellBtn2Price};
 const sellBtn3Obj = {value: sellBtn3Price};
@@ -109,7 +134,7 @@ const sellBtn6Obj = {value: sellBtn6Price};
 const sellBtn7Obj = {value: sellBtn7Price};
 const sellBtn8Obj = {value: sellBtn8Price};
 
-// Add dataset names for buttons
+// Dataset names
 sellBtn.dataset.name = "Goo Grandma";
 sellBtn2.dataset.name = "Goo Farm";
 sellBtn3.dataset.name = "Goo Mine";
@@ -119,15 +144,15 @@ sellBtn6.dataset.name = "Goo Temple";
 sellBtn7.dataset.name = "Goo Wizard Tower";
 sellBtn8.dataset.name = "Goo Shipment";
 
-// Event listeners with integer click increases
-sellBtn.addEventListener("click", () => buyProperty(sellBtnObj, sellBtn, 1, 1));
-sellBtn2.addEventListener("click", () => buyProperty(sellBtn2Obj, sellBtn2, 10, 2));
-sellBtn3.addEventListener("click", () => buyProperty(sellBtn3Obj, sellBtn3, 50, 5));
-sellBtn4.addEventListener("click", () => buyProperty(sellBtn4Obj, sellBtn4, 75, 10));
-sellBtn5.addEventListener("click", () => buyProperty(sellBtn5Obj, sellBtn5, 300, 25));
-sellBtn6.addEventListener("click", () => buyProperty(sellBtn6Obj, sellBtn6, 1000, 50));
-sellBtn7.addEventListener("click", () => buyProperty(sellBtn7Obj, sellBtn7, 20000, 100));
-sellBtn8.addEventListener("click", () => buyProperty(sellBtn8Obj, sellBtn8, 100000, 500));
+// Event listeners
+sellBtn.addEventListener("click", () => buyProperty(sellBtnObj, sellBtn, 1, 1, {value: sellBtnCount}, sellBtnCountDisplay));
+sellBtn2.addEventListener("click", () => buyProperty(sellBtn2Obj, sellBtn2, 10, 2, {value: sellBtn2Count}, sellBtn2CountDisplay));
+sellBtn3.addEventListener("click", () => buyProperty(sellBtn3Obj, sellBtn3, 50, 5, {value: sellBtn3Count}, sellBtn3CountDisplay));
+sellBtn4.addEventListener("click", () => buyProperty(sellBtn4Obj, sellBtn4, 75, 10, {value: sellBtn4Count}, sellBtn4CountDisplay));
+sellBtn5.addEventListener("click", () => buyProperty(sellBtn5Obj, sellBtn5, 300, 25, {value: sellBtn5Count}, sellBtn5CountDisplay));
+sellBtn6.addEventListener("click", () => buyProperty(sellBtn6Obj, sellBtn6, 1000, 50, {value: sellBtn6Count}, sellBtn6CountDisplay));
+sellBtn7.addEventListener("click", () => buyProperty(sellBtn7Obj, sellBtn7, 20000, 100, {value: sellBtn7Count}, sellBtn7CountDisplay));
+sellBtn8.addEventListener("click", () => buyProperty(sellBtn8Obj, sellBtn8, 100000, 500, {value: sellBtn8Count}, sellBtn8CountDisplay));
 
 // Passive goo
 setInterval(function() {
@@ -148,6 +173,7 @@ setInterval(function() {
   
 </body>
 </html>
+
 
 
 
