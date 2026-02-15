@@ -25,7 +25,7 @@
 
   <script>
 let count = 0;
-  let passiveRate = 1; // starting passive goo per second
+  let passiveRate = 0; // start with 0 passive goo per second
   const button = document.getElementById("btn");
   const sellBtn = document.getElementById("sellBtn");
   const counter = document.getElementById("counter");
@@ -41,7 +41,7 @@ let count = 0;
     audio.play();
   });
 
-  // Sell 10 goo and increase passive rate by 1
+  // Sell 100 goo and increase passive rate by 1
   sellBtn.addEventListener("click", function() {
     const sellAmount = 100;
     if (count >= sellAmount) {
@@ -63,6 +63,7 @@ let count = 0;
 
 </body>
 </html>
+
 
 
 
